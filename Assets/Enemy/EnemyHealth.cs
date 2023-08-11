@@ -3,31 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Also pulls enemy script so code does not break if we add GameObject without it
+[RequireComponent(typeof(Enemy))]
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] int maxHitPoints = 5;
-    [SerializeField] int currentHitPoints = 0;
+    [SerializeField]
+    int maxHitPoints = 5;
+
+    [Tooltip("Adds amount to maxhitpoints when enemy dies.")]
+    [SerializeField]
+    int difficultyRamp = 1;
+
+    int currentHitPoints = 0;
 
     Enemy enemy;
 
-    void OnEnable() {
+    void OnEnable()
+    {
         currentHitPoints = maxHitPoints;
     }
 
-    void Start() {
+    void Start()
+    {
         enemy = GetComponent<Enemy>();
     }
 
-     void OnParticleCollision(GameObject other) {
+    void OnParticleCollision(GameObject other)
+    {
         ProcessHit();
     }
 
     void ProcessHit()
     {
         currentHitPoints--;
-        if(currentHitPoints <= 0){
-            enemy.RewardGold();
+        if (currentHitPoints <= 0)
+        {
             gameObject.SetActive(false);
+            maxHitPoints += difficultyRamp;
+            enemy.RewardGold();
         }
     }
 }
