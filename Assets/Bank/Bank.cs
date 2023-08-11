@@ -7,34 +7,45 @@ using TMPro;
 
 public class Bank : MonoBehaviour
 {
-    [SerializeField] int startingBalance = 150;
+    [SerializeField]
+    int startingBalance = 150;
 
-    [SerializeField] int currentBalance;
-    public int CurrentBalance { get { return currentBalance; } }
+    [SerializeField]
+    int currentBalance;
+    public int CurrentBalance
+    {
+        get { return currentBalance; }
+    }
 
-    [SerializeField] TextMeshProUGUI displayBalance;
+    [SerializeField]
+    TextMeshProUGUI displayBalance;
 
-    void Awake() {
+    void Awake()
+    {
         currentBalance = startingBalance;
         UpdateDisplay();
     }
 
-    public void Deposit(int amount) {
+    public void Deposit(int amount)
+    {
         currentBalance += Mathf.Abs(amount);
         UpdateDisplay();
     }
 
-    public void Withdraw(int amount) {
+    public void Withdraw(int amount)
+    {
         currentBalance -= Mathf.Abs(amount);
         UpdateDisplay();
 
-        if(currentBalance < 0) {
+        if (currentBalance < 0)
+        {
             //LoseGame
             ReloadScene();
         }
     }
 
-    void UpdateDisplay(){
+    void UpdateDisplay()
+    {
         displayBalance.text = "Gold: " + currentBalance;
     }
 
@@ -42,6 +53,5 @@ public class Bank : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
-
     }
 }

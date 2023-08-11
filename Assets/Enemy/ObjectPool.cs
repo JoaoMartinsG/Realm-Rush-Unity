@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] int poolSize = 5;
-    [SerializeField] float spawnTimer = 1f;
+    [SerializeField]
+    GameObject enemyPrefab;
+
+    [SerializeField]
+    int poolSize = 5;
+
+    [SerializeField]
+    float spawnTimer = 1f;
 
     GameObject[] pool;
 
-    void Awake() {
+    void Awake()
+    {
         PopulatePool();
     }
 
-
-    void Start() {
+    void Start()
+    {
         StartCoroutine(SpawnEnemy());
     }
 
@@ -24,14 +30,17 @@ public class ObjectPool : MonoBehaviour
     {
         pool = new GameObject[poolSize];
 
-        for(int i = 0; i< pool.Length; i++) {
+        for (int i = 0; i < pool.Length; i++)
+        {
             pool[i] = Instantiate(enemyPrefab, transform);
             pool[i].SetActive(false);
         }
     }
 
-    IEnumerator SpawnEnemy() {
-        while(true){
+    IEnumerator SpawnEnemy()
+    {
+        while (true)
+        {
             EnableObjectInPool();
             yield return new WaitForSeconds(spawnTimer);
         }
@@ -39,8 +48,10 @@ public class ObjectPool : MonoBehaviour
 
     void EnableObjectInPool()
     {
-        for(int i = 0; i < pool.Length; i++){
-            if(pool[i].activeInHierarchy == false){
+        for (int i = 0; i < pool.Length; i++)
+        {
+            if (pool[i].activeInHierarchy == false)
+            {
                 pool[i].SetActive(true);
                 return;
             }
