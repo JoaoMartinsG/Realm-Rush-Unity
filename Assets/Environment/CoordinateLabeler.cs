@@ -15,13 +15,12 @@ public class CoordinateLabeler : MonoBehaviour
     Color blockedColor = Color.grey;
 
     TextMeshPro label;
-    Vector2Int coordinates = new Vector2Int();
+    Vector2Int coordinates = new();
     Waypoint waypoint;
 
     void Awake()
     {
         label = GetComponent<TextMeshPro>();
-        label.enabled = false;
         waypoint = GetComponentInParent<Waypoint>();
         DisplayCoordinates();
     }
@@ -47,14 +46,7 @@ public class CoordinateLabeler : MonoBehaviour
 
     void SetLabelColor()
     {
-        if (waypoint.IsPlaceable)
-        {
-            label.color = defaultColor;
-        }
-        else
-        {
-            label.color = blockedColor;
-        }
+        label.color = waypoint.IsPlaceable ? defaultColor : blockedColor;
     }
 
     void DisplayCoordinates()

@@ -9,6 +9,7 @@ public class TargetLocator : MonoBehaviour
     [SerializeField] Transform weapon;
     [SerializeField] ParticleSystem projectileParticles;
     [SerializeField] float towerRange = 15f;
+
     Transform target;
 
     void Update() {
@@ -36,6 +37,7 @@ public class TargetLocator : MonoBehaviour
         float targetDistance = Vector3.Distance(transform.position, target.position);
 
         weapon.LookAt(target);
+        
         
         if(targetDistance <= towerRange) {
             Attack(true);
