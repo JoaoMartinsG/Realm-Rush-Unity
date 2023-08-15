@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField]
-    List<Waypoint> path = new List<Waypoint>();
+    List<Waypoint> path = new();
 
     [SerializeField]
     [Range(0f, 5f)]
